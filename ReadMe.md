@@ -17,7 +17,7 @@ Your personal book reading tracker web app
 
 - Install [Docker](https://docs.docker.com/engine/install/) on your system
 - Run `docker compose up -d`
-- Visit `https://localhost:6060` from your browser
+- Visit `http://localhost:6060` from your browser
 
 #### Tech Stack:
 
