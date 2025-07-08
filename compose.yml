@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      MONGO_INITDB_DATABASE: booksy
+
+  backend:
+    build:
+      context: ./booksy-backend
+      dockerfile: Dockerfile
+    container_name: booksy-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+    environment:
+      QUARKUS_MONGODB_CONNECTION_STRING: mongodb://mongo:27017
+  frontend:
+    build:
+      context: ./booksy-frontend
+      dockerfile: Dockerfile
+    container_name: booksy-frontend
+    ports:
+      - "6060:80"
+
+volumes:
+  mongo_data:
